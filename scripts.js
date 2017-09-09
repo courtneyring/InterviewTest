@@ -38,9 +38,11 @@ function populateTable(data, id){
                 <td><input id='checkbox`+data[d].id+`' type="checkbox"></td>
                 <td class='id'>`+data[d].id+`</td>
                 <td class='title'>`+data[d].title+`</td>
-                <td><select onchange="onSelect(this)" class="select" id="select`+data[d].id+`"><option selected="selected">Select...</option></select></td>
+                <td><select onchange="onSelect(this)" class="select" id="select`+data[d].id+`"><option selected="selected">Select</option></select></td>
             </tr>`
         )
+        console.log(data[d].userId);
+        getUsers(data[d].userId, data[d].id);
     }    
 }
 
@@ -51,9 +53,10 @@ function updateTable(data){
                 <td><input id='checkbox`+data.id+`' type="checkbox"></td>
                 <td class='id'>`+data.id+`</td>
                 <td class='title'>`+data.title+`</td>
-                <td><select onchange="onSelect(this)" class="select" id="select`+data.id+`"><option selected="selected">Select...</option></select></td>
+                <td><select onchange="onSelect(this)" class="select" id="select`+data.id+`"><option selected="selected">Select</option></select></td>
             </tr>`
         )
+    getUsers(data.userId, data.id);
 }
 
 
@@ -123,12 +126,15 @@ function moveAlbum(albumId, usrId){
 
 
 /*User Functions*/
-function getUsers(){
+function getUsers(userId, albumId){
     $.ajax('http://jsonplaceholder.typicode.com/users/', {
       method: 'GET',
     }).then(function(data) {
         for(d in data){
-            $('table tbody tr select').append('<option value="'+data[d].id+'">'+data[d].name+'</option>')
+            if(data[d].id==userId){
+                continue;
+            }
+            $('#select'+albumId).append('<option value="'+data[d].id+'">'+data[d].name+'</option>')
         }
     });
 
