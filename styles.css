@@ -1,15 +1,53 @@
 body {
     font-family: 'Helvetica', 'Arial', sans-serif;
-    padding: 0 50px;
+    //padding: 0 50px;
     background-color: #EFEFEF;
+}
+
+@media( min-width: 768px){
+    body {
+        padding: 0 50px;
+    }
 }
 
 main {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap; 
 }
 
+.table-col{
+    width:100%;
+}
 
+@media (min-width:768px) {
+    .table-col {
+        width:48%;
+    }
+}
+
+.hero {
+    height: 307px;
+    background-position: top center;
+    background-size: cover;
+    background-image: url(http://goodguy.fitness/wp-content/uploads/2015/07/Optimized-desk-music-headphones-earphones-1140x400.jpg);
+}
+
+.heading {
+    position: absolute;
+    top: 75px;
+    left: 10px;
+    color: white;
+    font-size: 50px;
+    text-align: center;
+}
+
+@media (min-width: 768px){
+    .heading {
+        left: 85px;
+        text-align:left;
+    }
+}
 
 .search {
     padding-bottom: 30px;
@@ -22,48 +60,49 @@ main {
     padding: 5px;
     border: 1px solid #333;
 }
-.search__button{
-    display: inline-block;
-    height: 30px;
-    padding: 5px;
-    border: 1px solid #333;
-    background-color: white;
-}
 
 
-
+/*Table Styles*/
 .table {
-    width: 48%;
-    border: 1px solid #333;
+    width: 100%;
+    border-collapse: collapse;
     background-color: white;
 }
-.table__header {
-    background-color: #333;
-    font-weight: bold;
-    color: white;
+
+table thead th {
+    background-color: #B8DAED;
+    text-align:left;
 }
 
-.table__row {
-    display: flex;
-    padding: 5px;
-    border-bottom: 1px solid #333;
-}
-.table__row:last-child {
-    border-bottom: 0
-}
-
-.table__cell {
-    margin-right: 10px;
-}
-.table__cell--short {
-    flex-shrink: 0;
-    width: 50px;
-}
-.table__cell:last-child {
-    margin-right: 0px;
+table tr th:nth-child(1),
+table tr td:nth-child(1), 
+table tr th:nth-child(2),
+table tr td:nth-child(2){
+    text-align: center;
+    width: 10%;
 }
 
+table tr th:nth-child(3),
+table tr td:nth-child(3){
+    width: 50%;
+}
 
+table tr:nth-child(even) td {
+    background-color: #fff;
+}
+
+table tr:nth-child(odd) td {
+    background-color: #DFE2E4;
+}
+
+table tr:hover td {
+    background-color:#5D98B8 ;
+}
+
+
+select {
+    width:72px;
+}
 
 .alert {
     display: none;

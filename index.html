@@ -13,69 +13,55 @@
 </head>
 
 <body>
-    <h1>Vaynermedia Mocks-Tape Music</h1>
-
-    <div class='search'>
-        <label class='search__label'>Search</label>
-        <input class='search__input' type='text'></input>
-
-        <p class="alert">No items match your search</p>
-    </div>
+    <div class="hero"></div>
+    
+    <h1 class="heading">Vaynermedia Music</h1>
 
     <main>
-        
-        <!--<div class='table' id="table1" ondrop="drop(event, this)" ondragover="allowDrop(event)">
-            <div class='table__row table__header'>
-                <div class='table__cell table__cell--short'>id</div>
-                <div class='table__cell'>title</div>
-            </div>
-            <div class='table__row' draggable='true' ondragstart='drag(event, this)' id='albumtest'>
-                <div class='table__cell table__cell--short id'>test</div>
-                <div class='table__cell table__cell title'>test</div>
-                <div class='table__cell table__cell--short options-cell'>
-                    <img class="options" src="https://image.flaticon.com/icons/svg/149/149946.svg">
-                    
-                </div>
-                <div class='table__cell table__cell--short options-cell'>
-                    <select>
-                        <option value="user1">User 1</option>
-                        <option value = "user2">User 2</option>
-                    </select>
-                    
-                </div>
-            </div>
-           
+        <div class="table-col">
+            <h2>Leanne's Music</h2>
+            <div class='search'>
+                <label class='search__label'>Search</label>
+                <input class='search__input' id="search1" type='text'>
 
-        </div>-->
-
-
-        <div class='table two' id="table2" ondrop="drop(event, this)" ondragover="allowDrop(event)">
-            <div class='table__row table__header'>
-                <div class='table__cell table__cell--short'>id</div>
-                <div class='table__cell'>title</div>
+                <p class="alert" id="alert1">No items match your search</p>
             </div>
-            
+            <table class="table" id="table1" ondrop="drop(event, this)" ondragover="allowDrop(event, this)"> 
+                <thead>
+                    <th>Select</th>
+                    <th>id</th>
+                    <th >Title</th>
+                    <th>Move Album</th>
+
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="table-col">
+            <h2>Ervin's Music</h2>
+            <div class='search'>
+                <label class='search__label'>Search</label>
+                <input class='search__input' id="search2" type='text'>
+
+                <p class="alert" id="alert2">No items match your search</p>
+            </div>
+            <table class="table" id="table2" ondrop="drop(event, this)" ondragover="allowDrop(event, this)">
+                <thead>
+                    <th>Select</th>
+                    <th>id</th>
+                    <th >Title</th>
+                    <th>Move Album</th>
+
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
         </div>
         
         
-        
-        
-        
     </main>
-    <table class="table" id="table1">
-        <thead>
-            <th class="table__cell">id</th>
-            <th class="table__cell">title</th>
-            <th>Move...</th>
-
-        </thead>
-        <tbody>
-            <tr>
-                <td>Test1</td>
-                <td>Test2</td>
-            </tr>
-        </tbody>
-    </table>
-
 </body>
 </html>

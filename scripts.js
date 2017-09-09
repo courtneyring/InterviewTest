@@ -1,39 +1,32 @@
 $(function() {
     getData('1');
     getData('2');
-    $('.search__input').on('input', searchUpdate);
-    //$('.options-cell').on('click', function(){getUsers(this)});
+    getUsers();
+    $('.search__input').on('input', function(){
+        searchUpdate(this);
+    });
+    
 });
 
-function displayOptions(users, el){
-    /*$(el).append(`
-        <div class="popover">
-            <p>Give Album To:</p>
-            <select id="select">`)
-
-    for (x in users){
-        $('#select').append(`<option value='` + users[x].name + `'>`+ users[x].name + `</option>`)
-    }
-    
-    $(el).append( '</select></div>')*/
-}
 
 
 /*Search Functions*/
-function searchUpdate(){
-    var searchVal = $('.search__input').val();
-        var count = 0;
-        $('.table__row').css('display','flex');
-        $('.alert').css('display','none');
-        $('.title').each(function(index){
-            if(($(this).text()).indexOf(searchVal) <  0){
-                count++;
-                $(this).parent().css('display','none');
-            }
-        });
-        if(count == $('.title').length){
-            $('.alert').css('display','inline-block');
+function searchUpdate(el){
+    searchId = el.id;
+    idNum = searchId.replace('search','');
+    var searchVal = $('#'+searchId).val();
+    var count = 0;
+    $('tr').css('display','table-row');
+    $('#alert'+idNum).css('display','none');
+    $('#table'+idNum+' .title').each(function(index){
+        if(($(this).text()).indexOf(searchVal) <  0){
+            count++;
+            $(this).parent().css('display','none');
         }
+    });
+    if(count == $('#table'+idNum+' .title').length){
+        $('#alert'+idNum).css('display','inline-block');
+    }
 }
 
 
@@ -41,22 +34,25 @@ function searchUpdate(){
 function populateTable(data, id){
     for (d in data){
         $('#'+id).append(
-            `<div class='table__row' draggable='true' ondragstart='drag(event, this)' id='album`+data[d].id+`'>
-                <div class='table__cell table__cell--short id'>`+data[d].id+`</div>
-                <div class='table__cell table__cell title'>`+data[d].title+`</div>
-            </div>`
+            `<tr draggable='true' ondragstart='drag(event, this, `+data[d].userId+` )' id='album`+data[d].id+`' ondragend = "dragEnd()">
+                <td><input id='checkbox`+data[d].id+`' type="checkbox"></td>
+                <td class='id'>`+data[d].id+`</td>
+                <td class='title'>`+data[d].title+`</td>
+                <td><select onchange="onSelect(this)" class="select" id="select`+data[d].id+`"><option selected="selected">Select...</option></select></td>
+            </tr>`
         )
-    }
-    
+    }    
 }
 
 function updateTable(data){
     $('#album'+data.id).remove();
     $('#table'+data.userId).append(
-            `<div class='table__row' draggable='true' ondragstart='drag(event, this)' id='album`+data.id+`'>
-                <div class='table__cell table__cell--short id'>`+data.id+`</div>
-                <div class='table__cell table__cell title'>`+data.title+`</div>
-            </div>`
+            `<tr draggable='true' ondragstart='drag(event, this,`+data.userId+`)' id='album`+data.id+`' ondragend = "dragEnd()">
+                <td><input id='checkbox`+data.id+`' type="checkbox"></td>
+                <td class='id'>`+data.id+`</td>
+                <td class='title'>`+data.title+`</td>
+                <td><select onchange="onSelect(this)" class="select" id="select`+data.id+`"><option selected="selected">Select...</option></select></td>
+            </tr>`
         )
 }
 
@@ -71,43 +67,69 @@ function getData(id){
     });
 }
 
+function onSelect(el){
+    userId = $(el).val();
+    albumId = (el.id.replace('select',''));
+    moveAlbum(albumId, userId)
+}
 
 /*Drag Functions*/
 function allowDrop(ev, el) {
-    $(el).css('opacity','0.5');
+    //$(el).css('opacity','0.5');
     ev.preventDefault();
 }
 
-function drag(ev, el) {
+function drag(ev, el, userId) {
+    $(el).find('input').prop('checked', true);
     ev.dataTransfer.setData("text", el.id);
+    if(userId == 1){
+        $('#table2').css('opacity','0.5');
+        $('#table2').css('border','2px dashed black');
+    }
+    else{
+        $('#table1').css('opacity','0.5');
+        $('#table1').css('border','2px dashed black');
+    }
 }
 
+function dragEnd(){
+    $('.table').css('opacity', '1');
+    $('.table').css('border', 'none');
+}
 
 function drop(ev, el) {
     ev.preventDefault();
-    var originId = ev.dataTransfer.getData("text");
-    var albumId = originId.replace("album","");
     var usrId = el.id.replace("table","");
-    console.log("Move " + albumId + " to "+usrId);
-   $.ajax('http://jsonplaceholder.typicode.com/albums/'+albumId, {
+    var selected = $('input:checked')
+    
+    for (s in selected){
+        idNum = (selected[s].id).replace("checkbox","");
+        moveAlbum(idNum, usrId);
+        console.log("Move " + idNum + " to "+usrId);
+    }
+}
+
+
+function moveAlbum(albumId, usrId){
+    $.ajax('http://jsonplaceholder.typicode.com/albums/'+albumId, {
       method: 'PATCH',
       data: {
         userId: usrId
       }
     }).then(function(data) {
         updateTable(data);
-    });
-    
-    
+    });   
 }
 
 
 /*User Functions*/
-function getUsers(el){
+function getUsers(){
     $.ajax('http://jsonplaceholder.typicode.com/users/', {
       method: 'GET',
     }).then(function(data) {
-        displayOptions(data, el);
+        for(d in data){
+            $('table tbody tr select').append('<option value="'+data[d].id+'">'+data[d].name+'</option>')
+        }
     });
 
 }
