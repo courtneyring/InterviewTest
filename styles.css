@@ -10,10 +10,13 @@ body {
     }
 }
 
+
 main {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap; 
+    padding: 20px 0px;
+    
 }
 
 .table-col{
@@ -27,15 +30,38 @@ main {
 }
 
 .hero {
-    height: 307px;
-    background-position: top center;
+    height: 365px;
+    background-position: center;
+    transform: scaleX(-1);
     background-size: cover;
     background-image: url(http://goodguy.fitness/wp-content/uploads/2015/07/Optimized-desk-music-headphones-earphones-1140x400.jpg);
 }
 
+.upper-block{
+    width: 545px;
+    height: 106px;
+    background-color: #114D6D;
+    top: 108px;
+    position: absolute;
+}
+
+.lower-block{
+    width: 545px;
+    height: 32px;
+    background-color: #8CDAB0;
+    top: 211px;
+    position: absolute;
+}
+
+@media (max-width:545px) {
+    .upper-block, .lower-block {
+        display: none;
+    }
+}
+
 .heading {
     position: absolute;
-    top: 75px;
+    top: 100px;
     left: 10px;
     color: white;
     font-size: 50px;
@@ -47,6 +73,19 @@ main {
         left: 85px;
         text-align:left;
     }
+    
+}
+
+select {
+    background-color: #8CDAB0;
+    border: none;
+    width: 75px;
+    height: 30px;
+}
+
+.name {
+    color: #114D6D;
+    font-size: 2em;
 }
 
 .search {
@@ -62,6 +101,7 @@ main {
 }
 
 
+
 /*Table Styles*/
 .table {
     width: 100%;
@@ -70,8 +110,14 @@ main {
 }
 
 table thead th {
-    background-color: #B8DAED;
+    background-color: #114D6D;
+    color: #fff;
     text-align:left;
+    padding: 10px;
+}
+
+table tbody td{
+    padding: 10px;
 }
 
 table tr th:nth-child(1),
@@ -84,7 +130,7 @@ table tr td:nth-child(2){
 
 table tr th:nth-child(3),
 table tr td:nth-child(3){
-    width: 50%;
+    width: 58%;
 }
 
 table tr:nth-child(even) td {
@@ -100,10 +146,6 @@ table tr:hover td {
 }
 
 
-select {
-    width:72px;
-}
-
 .alert {
     display: none;
 }
@@ -115,25 +157,4 @@ select {
 .options{
     width:25px; 
     height:18px;
-}
-
-.popover{
-    position: absolute;
-    top: 35px;
-    left: -27px;
-    background-color: #88b7d5;
-    right: 0;
-    width:200px;
-    height:200px;
-}
-
-.popover::before {
-    content: '';
-    position: absolute;
-    top: -14px;
-    left: calc(50% - 10px);
-    background: #88b7d5;
-    width: 20px;
-    height: 15px;
-    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }

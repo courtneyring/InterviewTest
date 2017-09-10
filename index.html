@@ -15,14 +15,22 @@
 <body>
     <div class="hero"></div>
     
+    
+    <div class="upper-block"></div>
+    <div class="lower-block"></div>
     <h1 class="heading">Vaynermedia Music</h1>
 
     <main>
         <div class="table-col">
-            <h2>Leanne's Music</h2>
+            <label>Change User Playlist: </label>
+            <select class="userSelect" id ="userSelect1" onchange="userSelect(this)">
+                <option selected="selected">Select</option>
+            </select>
+
+            <h2 class="name" id="title1">Leanne Graham</h2>
             <div class='search'>
                 <label class='search__label'>Search</label>
-                <input class='search__input' id="search1" type='text'>
+                <input class='search__input' id="search1" type='text' placeholder="Enter Album Name">
 
                 <p class="alert" id="alert1">No items match your search</p>
             </div>
@@ -40,10 +48,14 @@
             </table>
         </div>
         <div class="table-col">
-            <h2>Ervin's Music</h2>
+            <label>Change User Playlist: </label>
+            <select class="userSelect" id="userSelect2" onchange="userSelect(this)">
+                <option selected="selected">Select</option>
+            </select>
+            <h2 class="name" id="title2">Ervin Howell</h2>
             <div class='search'>
                 <label class='search__label'>Search</label>
-                <input class='search__input' id="search2" type='text'>
+                <input class='search__input' id="search2" type='text' placeholder="Enter Album Name">
 
                 <p class="alert" id="alert2">No items match your search</p>
             </div>
